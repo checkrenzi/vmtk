@@ -3,6 +3,7 @@
 # Library:   VMTK
 #
 ##############################################################################
+cmake_policy(SET CMP0148 NEW)
 include( ExternalProject )
 
 set(SUPERBUILD_INSTALL_PREFIX ${CMAKE_BINARY_DIR}/Install CACHE PATH
@@ -27,8 +28,14 @@ set( VMTK_DEPENDS "" )
 set( gen "${CMAKE_GENERATOR}" )
 
 if( VTK_VMTK_WRAP_PYTHON )
-
-find_package( PythonInterp )
+  find_package( Python3 COMPONENTS Interpreter Development REQUIRED )
+  set(PYTHON_EXECUTABLE ${Python3_EXECUTABLE})
+  set(PYTHON_INCLUDE_DIR ${Python3_INCLUDE_DIRS})
+  set(PYTHON_LIBRARY ${Python3_LIBRARIES})
+  set(PYTHON_DEBUG_LIBRARY ${Python3_LIBRARIES})
+  set(PYTHON_VERSION_MAJOR ${Python3_VERSION_MAJOR})
+  set(PYTHON_VERSION_MINOR ${Python3_VERSION_MINOR})
+	
 
 if (APPLE AND VMTK_BREW_PYTHON)
   execute_process(
@@ -37,8 +44,6 @@ if (APPLE AND VMTK_BREW_PYTHON)
     OUTPUT_STRIP_TRAILING_WHITESPACE)
   set(PYTHON_INCLUDE_DIR ${PYTHON_PREFIX}/Headers CACHE PATH "")
   set(PYTHON_LIBRARY ${PYTHON_PREFIX}/Python CACHE FILEPATH "")
-else ()
-  find_package( PythonLibs )
 endif ()
 
 if (WIN32)
@@ -79,6 +84,7 @@ if( NOT USE_SYSTEM_ITK )
   ##
   ## ITK
   ##
+
   set( proj ITK )
   ExternalProject_Add( ${proj}
     GIT_REPOSITORY "https://github.com/Kitware/ITK.git"
