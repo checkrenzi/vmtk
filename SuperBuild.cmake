@@ -64,7 +64,7 @@ if( NOT USE_SYSTEM_ITK )
 
   set(ITK_GIT_REPOSITORY "https://github.com/Kitware/ITK.git")
   if (VMTK_USE_ITK5)
-    set(ITK_GIT_TAG "v5.3.0")
+    set(ITK_GIT_TAG "v5.4.3")
     set( ITK_VERSION 5.3 )
     list(APPEND ITK_EXTERNAL_PROJECT_OPTIONAL_CMAKE_ARGS
       -DITK_LEGACY_REMOVE:BOOL=OFF   #<-- Allow LEGACY ITKv4 features for now.

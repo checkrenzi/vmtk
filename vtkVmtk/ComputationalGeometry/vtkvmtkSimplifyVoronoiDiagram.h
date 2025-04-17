@@ -31,6 +31,7 @@ Version:   $Revision: 1.4 $
 #include "vtkIdList.h"
 //#include "vtkvmtkComputationalGeometryWin32Header.h"
 #include "vtkvmtkWin32Header.h"
+#include "vtkVersion.h"
 
 #define VTK_VMTK_REMOVE_BOUNDARY_POINTS 0
 #define VTK_VMTK_REMOVE_BOUNDARY_CELLS 1
